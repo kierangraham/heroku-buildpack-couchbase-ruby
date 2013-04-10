@@ -5,7 +5,7 @@ This is a buildpack that enables using the [couchbase gem](https://github.com/co
 
 Note this only works with couchbase **1.2.0.dp** so you must have `gem 'couchbase', '1.2.0.dp'` in your **Gemfile**.
 
-    heroku create --stack cedar --buildpack http://github.com/davidjrice/heroku-buildpack-ruby-couchbase.git
+    heroku create --stack cedar --buildpack https://github.com/kierangraham/heroku-buildpack-ruby-couchbase.git
     git push heroku master
     ...
     -----> Heroku receiving push
