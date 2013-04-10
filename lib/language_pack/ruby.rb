@@ -80,7 +80,7 @@ class LanguagePack::Ruby < LanguagePack::Base
       install_libvbucket
       install_libcouchbase
       run("cp -R vendor/couchbase /app/vendor/couchbase")
-      #install_couchbase_gem
+      install_couchbase_gem
       #run("gem install couchbase --with-libcouchbase-dir=bin/libcouchbase")
 
       install_language_pack_gems
@@ -355,7 +355,7 @@ ERROR
 
   def install_couchbase_gem
     topic("Installing couchbase")
-    run("gem install couchbase --pre  --no-ri --no-rdoc --env-shebang -- --with-libcouchbase-dir=/app/vendor/couchbase")
+    run("gem install couchbase --no-ri --no-rdoc --env-shebang -- --with-libcouchbase-dir=/app/vendor/couchbase")
   end
 
   def install_libvbucket
