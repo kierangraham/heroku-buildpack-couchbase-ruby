@@ -533,6 +533,11 @@ WARNING
           libyaml_dir = "#{tmpdir}/#{LIBYAML_PATH}"
           install_libyaml(libyaml_dir)
 
+          # need to setup environment for couchbase gem
+          couchbase_dir = '/app/vendor/couchbase'
+          couchbase_inc = File.expand_path("#{couchbase_dir}/include").shellescape
+          couchbase_lib = File.expand_path("#{couchbase_dir}/lib").shellescape
+
           # need to setup compile environment for the psych gem
           yaml_include   = File.expand_path("#{libyaml_dir}/include").shellescape
           yaml_lib       = File.expand_path("#{libyaml_dir}/lib").shellescape
@@ -543,13 +548,17 @@ WARNING
           env_vars       = {
             "BUNDLE_GEMFILE"                => "#{pwd}/Gemfile",
             "BUNDLE_CONFIG"                 => "#{pwd}/.bundle/config",
-            "CPATH"                         => noshellescape("/app/vendor/couchbase/include:#{yaml_include}:$CPATH"),
-            "CPPATH"                        => noshellescape("/app/vendor/couchbase/include:#{yaml_include}:$CPPATH"),
-            "LIBRARY_PATH"                  => noshellescape("/app/vendor/couchbase:#{yaml_lib}:$LIBRARY_PATH"),
+            "CPATH"                         => noshellescape("#{yaml_include}:$CPATH"),
+            "CPPATH"                        => noshellescape("#{yaml_include}:$CPPATH"),
+            "LIBRARY_PATH"                  => noshellescape("#{yaml_lib}:$LIBRARY_PATH"),
             "RUBYOPT"                       => syck_hack,
             "NOKOGIRI_USE_SYSTEM_LIBRARIES" => "true"
           }
           env_vars["BUNDLER_LIB_PATH"] = "#{bundler_path}" if ruby_version.ruby_version == "1.8.7"
+
+          # setup couchbase build configuration for bundler
+          run("#{env_vars} bundle config build.couchbase --with-libcouchbase-dir=#{couchbase_dir}")
+
           puts "Running: #{bundle_command}"
           instrument "ruby.bundle_install" do
             bundle_time = Benchmark.realtime do
