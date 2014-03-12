@@ -95,7 +95,7 @@ class LanguagePack::Ruby < LanguagePack::Base
   		  install_libcouchbase
         run("cp -R vendor/#{COUCHBASE_DIR} /app/vendor/couchbase")
         puts `ls /app/vendor/couchbase`
-        puts `ls vendor`
+        puts `ls vendor/couchbase`
         # install_couchbase_gem
         install_bundler_in_app
         build_bundler
