@@ -90,16 +90,16 @@ class LanguagePack::Ruby < LanguagePack::Base
       setup_language_pack_environment
       setup_profiled
       allow_git do
-		install_libvbucket
-		install_libcouchbase
-      	run("cp -R vendor/couchbase /app/vendor/couchbase")
+  		  install_libvbucket
+  		  install_libcouchbase
+        run("cp -R vendor/couchbase /app/vendor/couchbase")
       	install_couchbase_gem
         install_bundler_in_app
         build_bundler
         create_database_yml
         install_binaries
         run_assets_precompile_rake_task
-      end
+        end
       super
     end
   end
@@ -428,7 +428,7 @@ WARNING
 
   def install_couchbase_gem
     topic("Installing couchbase")
-    run("gem install couchbase --pre  --no-ri --no-rdoc --env-shebang -- --with-libcouchbase-dir=vendor/couchbase")
+    run("gem install couchbase --pre  --no-ri --no-rdoc --env-shebang -- --with-libcouchbase-dir=/app/vendor/couchbase")
   end
 
   def install_libvbucket
@@ -448,10 +448,6 @@ WARNING
     Dir.chdir(bin_dir) do |dir|
       run("curl #{COUCHBASE_VENDOR_URL} -s -o - | tar xzf -")
     end
-  end
-
-  def install_couchbase_gem
-    topic("Installing couchbase")
   end
 
   def load_default_cache?
