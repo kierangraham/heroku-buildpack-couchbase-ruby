@@ -94,8 +94,6 @@ class LanguagePack::Ruby < LanguagePack::Base
   		  install_libvbucket
   		  install_libcouchbase
         run("cp -R vendor/couchbase /app/vendor/couchbase")
-        puts `ls /app/vendor/couchbase`
-        puts `ls vendor/couchbase`
         # install_couchbase_gem
         install_bundler_in_app
         build_bundler
@@ -429,10 +427,10 @@ WARNING
     FileUtils.rm File.join('bin', File.basename(path)), :force => true
   end
 
-  def install_couchbase_gem
-    topic("Installing couchbase")
-    run("gem install couchbase --pre  --no-ri --no-rdoc --env-shebang -- --with-libcouchbase-dir=/app/vendor/couchbase")
-  end
+  # def install_couchbase_gem
+  #   topic("Installing couchbase")
+  #   run("gem install couchbase --pre  --no-ri --no-rdoc --env-shebang -- --with-libcouchbase-dir=/app/vendor/couchbase")
+  # end
 
   def install_libvbucket
     topic("Installing libvbucket")
@@ -545,9 +543,9 @@ WARNING
           env_vars       = {
             "BUNDLE_GEMFILE"                => "#{pwd}/Gemfile",
             "BUNDLE_CONFIG"                 => "#{pwd}/.bundle/config",
-            "CPATH"                         => noshellescape("#{yaml_include}:$CPATH"),
-            "CPPATH"                        => noshellescape("#{yaml_include}:$CPPATH"),
-            "LIBRARY_PATH"                  => noshellescape("#{yaml_lib}:$LIBRARY_PATH"),
+            "CPATH"                         => noshellescape("/app/vendor/couchbase/include:#{yaml_include}:$CPATH"),
+            "CPPATH"                        => noshellescape("/app/vendor/couchbase/include:#{yaml_include}:$CPPATH"),
+            "LIBRARY_PATH"                  => noshellescape("/app/vendor/couchbase:#{yaml_lib}:$LIBRARY_PATH"),
             "RUBYOPT"                       => syck_hack,
             "NOKOGIRI_USE_SYSTEM_LIBRARIES" => "true"
           }
