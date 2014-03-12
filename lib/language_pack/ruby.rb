@@ -21,8 +21,8 @@ class LanguagePack::Ruby < LanguagePack::Base
   LEGACY_JVM_VERSION   = "openjdk1.7.0_25"
   DEFAULT_RUBY_VERSION = "ruby-2.0.0"
   RBX_BASE_URL         = "http://binaries.rubini.us/heroku"
-COUCHBASE_VENDOR_URL = "http://packages.couchbase.com/clients/c/libcouchbase-2.0.5.tar.gz"
-  VBUCKET_VENDOR_URL = "http://libcouchbase.s3.amazonaws.com/libvbucket.gz"
+  COUCHBASE_VENDOR_URL = "http://packages.couchbase.com/clients/c/libcouchbase-2.2.0.tar.gz"
+  VBUCKET_VENDOR_URL   = "http://libcouchbase.s3.amazonaws.com/libvbucket.gz"
 
   # detects if this is a valid Ruby app
   # @return [Boolean] true if it's a Ruby app
