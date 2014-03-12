@@ -93,7 +93,7 @@ class LanguagePack::Ruby < LanguagePack::Base
       allow_git do
   		  install_libvbucket
   		  install_libcouchbase
-        run("cp -R vendor/#{COUCHBASE_DIR} /app/vendor/couchbase")
+        run("cp -R vendor/couchbase /app/vendor/couchbase")
         puts `ls /app/vendor/couchbase`
         puts `ls vendor/couchbase`
         # install_couchbase_gem
