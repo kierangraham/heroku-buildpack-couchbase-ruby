@@ -23,6 +23,7 @@ class LanguagePack::Ruby < LanguagePack::Base
   RBX_BASE_URL         = "http://binaries.rubini.us/heroku"
   COUCHBASE_VENDOR_URL = "http://packages.couchbase.com/clients/c/libcouchbase-2.2.0.tar.gz"
   VBUCKET_VENDOR_URL   = "http://libcouchbase.s3.amazonaws.com/libvbucket.gz"
+  COUCHBASE_DIR        = "libcouchbase-2.2.0"
 
   # detects if this is a valid Ruby app
   # @return [Boolean] true if it's a Ruby app
@@ -92,8 +93,8 @@ class LanguagePack::Ruby < LanguagePack::Base
       allow_git do
   		  install_libvbucket
   		  install_libcouchbase
-        run("cp -R vendor/couchbase /app/vendor/couchbase")
-      	install_couchbase_gem
+        run("cp -R vendor/#{COUCHBASE_DIR} /app/vendor/couchbase")
+	# install_couchbase_gem
         install_bundler_in_app
         build_bundler
         create_database_yml
