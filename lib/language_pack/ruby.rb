@@ -454,6 +454,10 @@ WARNING
     topic("Installing couchbase")
   end
 
+  def load_default_cache?
+    new_app? && ruby_version.default?
+  end
+
   # loads a default bundler cache for new apps to speed up initial bundle installs
   def load_default_cache
     instrument "ruby.load_default_cache" do
