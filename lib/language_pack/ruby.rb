@@ -535,7 +535,7 @@ WARNING
 
           # need to setup environment for couchbase gem
           puts "BUILD_DIR"
-          puts `ls $BUILD_DIR`
+          puts `ls $BUILD_DIR/vendor`
 
           puts "/app/vendor/couchbase"
           puts `ls /app/vendor/couchbase`
