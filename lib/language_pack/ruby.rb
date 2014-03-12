@@ -534,6 +534,9 @@ WARNING
           install_libyaml(libyaml_dir)
 
           # need to setup environment for couchbase gem
+          puts `ls $BUILD_DIR`
+          puts `ls /app/vendor`
+
           couchbase_dir = '/app/vendor/couchbase'
           couchbase_inc = File.expand_path("#{couchbase_dir}/include").shellescape
           couchbase_lib = File.expand_path("#{couchbase_dir}/lib").shellescape
