@@ -571,7 +571,7 @@ WARNING
 
           # setup couchbase build configuration for bundler
           # run("#{env_vars} bundle config build.couchbase --with-libcouchbase-include=#{couchbase_inc} --with-libcouchbase-lib=#{couchbase_lib}")
-          run "echo \"BUNDLE_BUILD__COUCHBASE: --with-libcouchbase-include=#{couchbase_inc} --with-libcouchbase-lib=#{couchbase_lib}\" >> /app/.bundle/config")
+          run("echo \"BUNDLE_BUILD__COUCHBASE: --with-libcouchbase-include=#{couchbase_inc} --with-libcouchbase-lib=#{couchbase_lib}\" >> /app/.bundle/config")
 
           puts run("bundle config")
           puts "Running: #{bundle_command}"
