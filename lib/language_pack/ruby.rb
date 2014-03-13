@@ -458,9 +458,9 @@ WARNING
 
       FileUtils.mkdir_p build_dir
 
-      puts run("./libcouchbase-2.2.0/configure --prefix=#{File.expand_path(build_dir)} --disable-debug --disable-examples --disable-tests --disable-couchbasemock")
-      puts run("make")
-      puts run("make install")
+      run("./libcouchbase-2.2.0/configure --prefix=#{File.expand_path(build_dir)} --disable-debug --disable-examples --disable-tests --disable-couchbasemock")
+      run("make")
+      run("make install")
     end
   end
 
@@ -570,7 +570,7 @@ WARNING
           env_vars["BUNDLER_LIB_PATH"] = "#{bundler_path}" if ruby_version.ruby_version == "1.8.7"
 
           # setup couchbase build configuration for bundler
-          run("#{env_vars} bundle config build.couchbase --with-libcouchbase-include=#{couchbase_inc} --with-libcouchbase-include=#{couchbase_lib}")
+          run("#{env_vars} bundle config build.couchbase --with-libcouchbase-include=#{couchbase_inc} --with-libcouchbase-lib=#{couchbase_lib}")
 
           puts "Running: #{bundle_command}"
           instrument "ruby.bundle_install" do
