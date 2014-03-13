@@ -93,8 +93,6 @@ class LanguagePack::Ruby < LanguagePack::Base
       allow_git do
   		  install_libvbucket
   		  install_libcouchbase
-
-        # install_couchbase_gem
         install_bundler_in_app
         build_bundler
         create_database_yml
@@ -427,11 +425,6 @@ WARNING
     FileUtils.rm File.join('bin', File.basename(path)), :force => true
   end
 
-  # def install_couchbase_gem
-  #   topic("Installing couchbase")
-  #   run("gem install couchbase --pre  --no-ri --no-rdoc --env-shebang -- --with-libcouchbase-include=/app/vendor/libcouchbase/include --with-libcouchbase-lib=/app/vendor/libcouchbase/lib")
-  # end
-
   def install_libvbucket
     topic("Installing libvbucket")
     bin_dir = "vendor/couchbase"
@@ -460,8 +453,8 @@ WARNING
       run("make install")
     end
 
-    puts run("cp -R vendor/couchbase/build vendor/libcouchbase")
-    puts run("cp -R vendor/couchbase/build /app/vendor/libcouchbase")
+    run("cp -R vendor/couchbase/build vendor/libcouchbase")
+    run("cp -R vendor/couchbase/build /app/vendor/libcouchbase")
   end
 
   def load_default_cache?
@@ -550,9 +543,6 @@ WARNING
           couchbase_dir = '/app/vendor/libcouchbase'
           couchbase_inc = File.expand_path("#{couchbase_dir}/include").shellescape
           couchbase_lib = File.expand_path("#{couchbase_dir}/lib").shellescape
-
-          puts "/app/vendor/libcouchbase"
-          puts `ls -la #{couchbase_dir}`
 
           # need to setup compile environment for the psych gem
           yaml_include   = File.expand_path("#{libyaml_dir}/include").shellescape
