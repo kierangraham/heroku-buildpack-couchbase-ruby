@@ -557,7 +557,7 @@ WARNING
           install_libyaml(libyaml_dir)
 
           # need to setup environment for couchbase gem
-          couchbase_dir = '/app/vendor/libcouchbase'
+          couchbase_dir = '/app/vendor/couchbase/build'
           couchbase_inc = File.expand_path("#{couchbase_dir}/include").shellescape
           couchbase_lib = File.expand_path("#{couchbase_dir}/lib").shellescape
 
@@ -580,7 +580,7 @@ WARNING
           env_vars["BUNDLER_LIB_PATH"] = "#{bundler_path}" if ruby_version.ruby_version == "1.8.7"
 
           # setup couchbase build configuration for bundler
-          run("#{env_vars} bundle config build.couchbase --with-libcouchbase-include==#{couchbase_inc} --with-libcouchbase-include==#{couchbase_lib}")
+          run("#{env_vars} bundle config build.couchbase --with-libcouchbase-include=#{couchbase_inc} --with-libcouchbase-include=#{couchbase_lib}")
 
           puts "Running: #{bundle_command}"
           instrument "ruby.bundle_install" do
