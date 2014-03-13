@@ -461,6 +461,9 @@ WARNING
     end
 
     run("cp -R vendor/couchbase/build vendor/libcouchbase")
+
+    puts "vendor/libcouchbase"
+    puts `ls -la vendor/libcouchbase`
   end
 
   def load_default_cache?
