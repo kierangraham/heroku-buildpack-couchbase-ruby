@@ -94,6 +94,7 @@ class LanguagePack::Ruby < LanguagePack::Base
   		  install_libvbucket
   		  install_libcouchbase
         run("cp -R vendor/couchbase /app/vendor/couchbase")
+        run("cp -R vendor/couchbase /app/vendor/libcouchbase")
 
         # install_couchbase_gem
         install_bundler_in_app
@@ -545,7 +546,7 @@ WARNING
           install_libyaml(libyaml_dir)
 
           # need to setup environment for couchbase gem
-          couchbase_dir = 'vendor/couchbase/build'
+          couchbase_dir = '/app/vendor/libcouchbase'
           couchbase_inc = File.expand_path("#{couchbase_dir}/include").shellescape
           couchbase_lib = File.expand_path("#{couchbase_dir}/lib").shellescape
 
@@ -568,7 +569,7 @@ WARNING
           env_vars["BUNDLER_LIB_PATH"] = "#{bundler_path}" if ruby_version.ruby_version == "1.8.7"
 
           # setup couchbase build configuration for bundler
-          run("#{env_vars} bundle config build.couchbase --with-libcouchbase-include=#{couchbase_inc} --with-libcouchbase-lib=#{couchbase_lib}")
+          # run("#{env_vars} bundle config build.couchbase --with-libcouchbase-include=#{couchbase_inc} --with-libcouchbase-lib=#{couchbase_lib}")
           run("echo \"BUNDLE_BUILD__COUCHBASE: --with-libcouchbase-include=#{couchbase_inc} --with-libcouchbase-lib=#{couchbase_lib}\" >> #{pwd}/.bundle/config")
 
           instrument "ruby.bundle_install" do
