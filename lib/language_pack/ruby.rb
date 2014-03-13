@@ -94,7 +94,7 @@ class LanguagePack::Ruby < LanguagePack::Base
   		  install_libvbucket
   		  install_libcouchbase
         run("cp -R vendor/couchbase /app/vendor/couchbase")
-        run("cp -R vendor/libcouchbase /app/vender/libcouchbase")
+        run("cp -R vendor/libcouchbase /app/vendor/libcouchbase")
 
         puts `ls -la /app/vendor`
 
@@ -455,9 +455,9 @@ WARNING
     Dir.chdir(bin_dir) do |dir|
       run("curl #{COUCHBASE_VENDOR_URL} -s -o - | tar xzf -")
 
-      puts run("./libcouchbase-2.2.0/configure --prefix=#{build_dir} --disable-debug --disable-examples --disable-tests --disable-couchbasemock")
-      puts run("make")
-      puts run("make install")
+      run("./libcouchbase-2.2.0/configure --prefix=#{build_dir} --disable-debug --disable-examples --disable-tests --disable-couchbasemock")
+      run("make")
+      run("make install")
     end
   end
 
