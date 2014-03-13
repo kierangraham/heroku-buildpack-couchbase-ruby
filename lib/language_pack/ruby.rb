@@ -95,7 +95,10 @@ class LanguagePack::Ruby < LanguagePack::Base
   		  install_libcouchbase
         run("cp -R vendor/couchbase /app/vendor/couchbase")
         run("cp -R vendor/libcouchbase /app/vender/libcouchbase")
-        install_couchbase_gem
+
+        puts `ls -la /app/vendor`
+
+        # install_couchbase_gem
         install_bundler_in_app
         build_bundler
         create_database_yml
