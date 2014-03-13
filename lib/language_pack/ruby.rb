@@ -93,8 +93,6 @@ class LanguagePack::Ruby < LanguagePack::Base
       allow_git do
   		  install_libvbucket
   		  install_libcouchbase
-        run("cp -R vendor/couchbase /app/vendor/couchbase")
-        run("cp -R vendor/couchbase /app/vendor/libcouchbase")
 
         # install_couchbase_gem
         install_bundler_in_app
@@ -429,10 +427,10 @@ WARNING
     FileUtils.rm File.join('bin', File.basename(path)), :force => true
   end
 
-  def install_couchbase_gem
-    topic("Installing couchbase")
-    run("gem install couchbase --pre  --no-ri --no-rdoc --env-shebang -- --with-libcouchbase-include=/app/vendor/libcouchbase/include --with-libcouchbase-lib=/app/vendor/libcouchbase/lib")
-  end
+  # def install_couchbase_gem
+  #   topic("Installing couchbase")
+  #   run("gem install couchbase --pre  --no-ri --no-rdoc --env-shebang -- --with-libcouchbase-include=/app/vendor/libcouchbase/include --with-libcouchbase-lib=/app/vendor/libcouchbase/lib")
+  # end
 
   def install_libvbucket
     topic("Installing libvbucket")
@@ -461,6 +459,8 @@ WARNING
       run("make")
       run("make install")
     end
+
+    run("cp -R vendor/couchbase/build vendor/libcouchbase")
   end
 
   def load_default_cache?
