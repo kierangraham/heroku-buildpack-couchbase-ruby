@@ -547,10 +547,9 @@ WARNING
           install_libyaml(libyaml_dir)
 
           # need to setup environment for couchbase gem
-          puts couchbase_dir = '/app/vendor/couchbase/build'
-          puts `ls -la /app/vendor/couchbase/build`
-          puts couchbase_inc = File.expand_path("#{couchbase_dir}/include").shellescape
-          puts couchbase_lib = File.expand_path("#{couchbase_dir}/lib").shellescape
+          couchbase_dir = '/app/vendor/couchbase/build'
+          couchbase_inc = File.expand_path("#{couchbase_dir}/include").shellescape
+          couchbase_lib = File.expand_path("#{couchbase_dir}/lib").shellescape
 
           # need to setup compile environment for the psych gem
           yaml_include   = File.expand_path("#{libyaml_dir}/include").shellescape
@@ -573,6 +572,7 @@ WARNING
           # setup couchbase build configuration for bundler
           run("#{env_vars} bundle config build.couchbase --with-libcouchbase-include=#{couchbase_inc} --with-libcouchbase-lib=#{couchbase_lib}")
 
+          puts run("bundle config")
           puts "Running: #{bundle_command}"
           instrument "ruby.bundle_install" do
             bundle_time = Benchmark.realtime do
