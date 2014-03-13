@@ -458,7 +458,7 @@ WARNING
 
       FileUtils.mkdir_p build_dir
 
-      puts run("./libcouchbase-2.2.0/configure --prefix=#{build_dir} --disable-debug --disable-examples --disable-tests --disable-couchbasemock")
+      puts run("./libcouchbase-2.2.0/configure --prefix=#{File.expand_path(build_dir)} --disable-debug --disable-examples --disable-tests --disable-couchbasemock")
       puts run("make")
       puts run("make install")
     end
