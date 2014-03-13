@@ -96,8 +96,8 @@ class LanguagePack::Ruby < LanguagePack::Base
         puts run("pwd")
         run("cp -R vendor/couchbase /app/vendor/couchbase")
 
-        puts "/app/vendor/couchbase/build"
-        puts `ls -la /app/vendor/couchbase/build`
+        puts "/app/vendor/couchbase/build/bin"
+        puts `ls -la /app/vendor/couchbase/build/bin`
 
 
         # install_couchbase_gem
