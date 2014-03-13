@@ -445,6 +445,9 @@ WARNING
 
   def install_libcouchbase
     topic("Installing libcouchbase")
+
+    puts `ls -la vendor/couchbase`
+
     bin_dir = "vendor/couchbase"
     build_dir = "build"
     FileUtils.mkdir_p bin_dir
