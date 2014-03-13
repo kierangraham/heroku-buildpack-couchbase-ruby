@@ -460,10 +460,8 @@ WARNING
       run("make install")
     end
 
-    run("cp -R vendor/couchbase/build vendor/libcouchbase")
-
-    puts "vendor/libcouchbase"
-    puts `ls -la vendor/libcouchbase`
+    puts run("cp -R vendor/couchbase/build vendor/libcouchbase")
+    puts run("cp -R vendor/couchbase/build /app/vendor/libcouchbase")
   end
 
   def load_default_cache?
