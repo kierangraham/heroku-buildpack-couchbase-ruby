@@ -94,7 +94,8 @@ class LanguagePack::Ruby < LanguagePack::Base
   		  install_libvbucket
   		  install_libcouchbase
         run("cp -R vendor/couchbase /app/vendor/couchbase")
-        # install_couchbase_gem
+        run("cp -R vendor/libcouchbase /app/vender/libcouchbase")
+        install_couchbase_gem
         install_bundler_in_app
         build_bundler
         create_database_yml
@@ -115,7 +116,6 @@ private
     # breaking require. This only applies to Ruby 1.9.2 and 1.8.7.
     safe_binstubs = binstubs_relative_paths - ["bin"]
     paths         = [
-      "/app/vendor/couchbase/bin",
       ENV["PATH"],
       "bin",
       system_paths,
@@ -428,10 +428,10 @@ WARNING
     FileUtils.rm File.join('bin', File.basename(path)), :force => true
   end
 
-  # def install_couchbase_gem
-  #   topic("Installing couchbase")
-  #   run("gem install couchbase --pre  --no-ri --no-rdoc --env-shebang -- --with-libcouchbase-dir=/app/vendor/couchbase")
-  # end
+  def install_couchbase_gem
+    topic("Installing couchbase")
+    run("gem install couchbase --pre  --no-ri --no-rdoc --env-shebang -- --with-libcouchbase-include=/app/vendor/libcouchbase/include --with-libcouchbase-lib=/app/vendor/libcouchbase/lib")
+  end
 
   def install_libvbucket
     topic("Installing libvbucket")
