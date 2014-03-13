@@ -446,10 +446,10 @@ WARNING
   def install_libcouchbase
     topic("Installing libcouchbase")
 
-    puts `ls -la vendor/couchbase`
-
     bin_dir = "vendor/couchbase"
     build_dir = "build"
+
+    FileUtils.rm_r bin_dir
     FileUtils.mkdir_p bin_dir
     Dir.chdir(bin_dir) do |dir|
       run("curl #{COUCHBASE_VENDOR_URL} -s -o - | tar xzf -")
