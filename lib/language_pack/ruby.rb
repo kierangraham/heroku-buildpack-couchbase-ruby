@@ -548,6 +548,7 @@ WARNING
 
           # need to setup environment for couchbase gem
           puts couchbase_dir = '/app/vendor/couchbase/build'
+          `ls -la /app/vendor/couchbase/build`
           puts couchbase_inc = File.expand_path("#{couchbase_dir}/include").shellescape
           puts couchbase_lib = File.expand_path("#{couchbase_dir}/lib").shellescape
 
