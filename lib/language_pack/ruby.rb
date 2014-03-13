@@ -547,9 +547,9 @@ WARNING
           install_libyaml(libyaml_dir)
 
           # need to setup environment for couchbase gem
-          couchbase_dir = '/app/vendor/couchbase/build'
-          couchbase_inc = File.expand_path("#{couchbase_dir}/include").shellescape
-          couchbase_lib = File.expand_path("#{couchbase_dir}/lib").shellescape
+          puts couchbase_dir = '/app/vendor/couchbase/build'
+          puts couchbase_inc = File.expand_path("#{couchbase_dir}/include").shellescape
+          puts couchbase_lib = File.expand_path("#{couchbase_dir}/lib").shellescape
 
           # need to setup compile environment for the psych gem
           yaml_include   = File.expand_path("#{libyaml_dir}/include").shellescape
