@@ -568,7 +568,7 @@ WARNING
           env_vars["BUNDLER_LIB_PATH"] = "#{bundler_path}" if ruby_version.ruby_version == "1.8.7"
 
           # setup couchbase build configuration for bundler
-          # run("#{env_vars} bundle config build.couchbase --with-libcouchbase-include=#{couchbase_inc} --with-libcouchbase-lib=#{couchbase_lib}")
+          run("#{env_vars} bundle config build.couchbase --with-libcouchbase-include=#{couchbase_inc} --with-libcouchbase-lib=#{couchbase_lib}")
           run("echo \"BUNDLE_BUILD__COUCHBASE: --with-libcouchbase-include=#{couchbase_inc} --with-libcouchbase-lib=#{couchbase_lib}\" >> #{pwd}/.bundle/config")
 
           instrument "ruby.bundle_install" do
