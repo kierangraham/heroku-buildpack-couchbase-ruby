@@ -450,7 +450,7 @@ WARNING
     FileUtils.mkdir_p bin_dir
     Dir.chdir(bin_dir) do |dir|
       run("curl #{COUCHBASE_VENDOR_URL} -s -o - | tar xzf -")
-      run("./configure --prefix=#{build_dir} --disable-debug")
+      run("./configure --prefix=#{build_dir} --disable-debug --disable-examples --disable-tests --disable-couchbasemock")
       run("make")
       run("make install")
     end
