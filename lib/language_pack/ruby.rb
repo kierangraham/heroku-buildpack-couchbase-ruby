@@ -93,12 +93,8 @@ class LanguagePack::Ruby < LanguagePack::Base
       allow_git do
   		  install_libvbucket
   		  install_libcouchbase
-        puts run("pwd")
-        run("cp -R vendor/couchbase /app/vendor/couchbase")
 
-        puts "/app/vendor/couchbase/build/bin"
-        puts `ls -la /app/vendor/couchbase/build/bin`
-
+        # run("cp -R vendor/couchbase /app/vendor/couchbase")
 
         # install_couchbase_gem
         install_bundler_in_app
@@ -550,7 +546,6 @@ WARNING
           couchbase_dir = 'vendor/couchbase/build'
           couchbase_inc = File.expand_path("#{couchbase_dir}/include").shellescape
           couchbase_lib = File.expand_path("#{couchbase_dir}/lib").shellescape
-
 
 
           # need to setup compile environment for the psych gem
