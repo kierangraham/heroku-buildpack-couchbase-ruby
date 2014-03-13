@@ -115,6 +115,7 @@ private
     # breaking require. This only applies to Ruby 1.9.2 and 1.8.7.
     safe_binstubs = binstubs_relative_paths - ["bin"]
     paths         = [
+      "/app/vendor/couchbase/bin",
       ENV["PATH"],
       "bin",
       system_paths,
@@ -445,9 +446,13 @@ WARNING
   def install_libcouchbase
     topic("Installing libcouchbase")
     bin_dir = "vendor/couchbase"
+    build_dir = "/app/vendor/libcouchbase"
     FileUtils.mkdir_p bin_dir
     Dir.chdir(bin_dir) do |dir|
       run("curl #{COUCHBASE_VENDOR_URL} -s -o - | tar xzf -")
+      run("./configure --prefix=#{build_dir} --disable-debug")
+      run("make")
+      run("make install")
     end
   end
 
@@ -534,13 +539,7 @@ WARNING
           install_libyaml(libyaml_dir)
 
           # need to setup environment for couchbase gem
-          puts "BUILD_DIR"
-          puts `ls $BUILD_DIR/vendor`
-
-          puts "/app/vendor/couchbase"
-          puts `ls /app/vendor/couchbase`
-
-          couchbase_dir = '/app/vendor/couchbase'
+          libcouchbase_dir = '/app/vendor/libcouchbase'
           couchbase_inc = File.expand_path("#{couchbase_dir}/include").shellescape
           couchbase_lib = File.expand_path("#{couchbase_dir}/lib").shellescape
 
@@ -563,7 +562,7 @@ WARNING
           env_vars["BUNDLER_LIB_PATH"] = "#{bundler_path}" if ruby_version.ruby_version == "1.8.7"
 
           # setup couchbase build configuration for bundler
-          run("#{env_vars} bundle config build.couchbase --with-libcouchbase-dir=#{couchbase_dir}")
+          run("#{env_vars} bundle config build.couchbase --with-libcouchbase-include==#{couchbase_inc} --with-libcouchbase-include==#{couchbase_lib}")
 
           puts "Running: #{bundle_command}"
           instrument "ruby.bundle_install" do
