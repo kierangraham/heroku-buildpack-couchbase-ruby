@@ -22,8 +22,6 @@ class LanguagePack::Ruby < LanguagePack::Base
   DEFAULT_RUBY_VERSION = "ruby-2.0.0"
   RBX_BASE_URL         = "http://binaries.rubini.us/heroku"
   COUCHBASE_VENDOR_URL = "http://packages.couchbase.com/clients/c/libcouchbase-2.2.0.tar.gz"
-  VBUCKET_VENDOR_URL   = "http://libcouchbase.s3.amazonaws.com/libvbucket.gz"
-  COUCHBASE_DIR        = "libcouchbase-2.2.0"
 
   # detects if this is a valid Ruby app
   # @return [Boolean] true if it's a Ruby app
@@ -91,7 +89,6 @@ class LanguagePack::Ruby < LanguagePack::Base
       setup_language_pack_environment
       setup_profiled
       allow_git do
-  		  install_libvbucket
   		  install_libcouchbase
         install_bundler_in_app
         build_bundler
@@ -423,16 +420,6 @@ WARNING
   # @param [String] relative path of the binary on the slug
   def uninstall_binary(path)
     FileUtils.rm File.join('bin', File.basename(path)), :force => true
-  end
-
-  def install_libvbucket
-    topic("Installing libvbucket")
-    bin_dir = "vendor/couchbase"
-    FileUtils.mkdir_p bin_dir
-    Dir.chdir(bin_dir) do |dir|
-      run("curl #{VBUCKET_VENDOR_URL} -s -o - | tar xzf -")
-      #run("chmod +x #{path}")
-    end
   end
 
   def install_libcouchbase
