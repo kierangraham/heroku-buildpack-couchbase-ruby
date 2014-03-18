@@ -428,12 +428,12 @@ WARNING
     bin_dir = "vendor/couchbase"
     build_dir = "build"
 
-    FileUtils.rm_r bin_dir
+    FileUtils.rm_r bin_dir if File.exists? bin_dir
     FileUtils.mkdir_p bin_dir
     Dir.chdir(bin_dir) do |dir|
       run("curl #{COUCHBASE_VENDOR_URL} -s -o - | tar xzf -")
 
-      FileUtils.mkdir_p build_dir
+      FileUtils.mkdir_p build_dir if File.exists? build_dir
 
       run("./libcouchbase-2.2.0/configure --prefix=#{File.expand_path(build_dir)} --disable-debug --disable-examples --disable-tests --disable-couchbasemock")
       run("make")
